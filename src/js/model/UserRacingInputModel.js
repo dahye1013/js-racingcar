@@ -1,8 +1,6 @@
+import { MAX_RACING_CAR_NAME } from '../constants/unit.js';
+import { ERROR } from '../constants/message.js';
 import ValidationError from '../utils/validation.js';
-import {
-  CarNameConfigurationStrategy,
-  PlayTimeConfigurationStrategy,
-} from './GameConfigurationStrategy.js';
 import { RandomMovingStrategy } from './MovingStrategy.js';
 
 export default class UserRacingInputModel {
@@ -26,13 +24,23 @@ export default class UserRacingInputModel {
     }, {});
   }
 
+  #validator = {
+    isValidCarName: carNames => {
+      const isValid = carNames.every(
+        carName => carName.length > 0 && carName.length <= MAX_RACING_CAR_NAME
+      );
+      if (!isValid)
+        throw new ValidationError(ERROR.INVALID_LENGTH_RACING_CAR_NAME);
+    },
+    isValidPlayTime(playTimes) {
+      const isValid = Number.isInteger(playTimes) && !Number.isNaN(playTimes);
+      if (!isValid) throw new ValidationError(ERROR.INVALID_TYPE_PLAY_TIME);
+    },
+  };
 
   updateCarNames = (carNames, resolve) => {
     try {
-      CarNameConfigurationStrategy.build()
-        .inputNames(carNames)
-        .isValidCarName();
-
+      this.#validator.isValidCarName(carNames);
       this.#carNames = carNames;
       resolve();
     } catch (err) {
@@ -43,12 +51,8 @@ export default class UserRacingInputModel {
 
   updatePlayTimes = (playTimes, resolve) => {
     try {
-      PlayTimeConfigurationStrategy.build()
-        .playTimes(playTimes)
-        .isValidPlayTime();
-
+      this.#validator.isValidPlayTime(playTimes);
       this.#playTimes = playTimes;
-
       resolve();
     } catch (err) {
       if (err instanceof ValidationError) alert(err.message);
