@@ -21,41 +21,6 @@ class RandomMovingStrategy extends MovingStrategy {
   }
 }
 
-class AlwaysMovingStrategy extends MovingStrategy {
-  static build() {
-    return new AlwaysMovingStrategy();
-  }
 
-  isMoveable() {
-    return true;
-  }
-}
 
-class NotMovingStrategy extends MovingStrategy {
-  static build() {
-    return new NotMovingStrategy();
-  }
-
-  isMoveable() {
-    return false;
-  }
-}
-class ToggleMovingStrategy extends MovingStrategy {
-  static build() {
-    return new ToggleMovingStrategy();
-  }
-
-  toggle = false;
-  isMoveable() {
-    this.toggle = !this.toggle;
-    return this.toggle;
-  }
-}
-
-export {
-  MovingStrategy,
-  RandomMovingStrategy,
-  AlwaysMovingStrategy,
-  NotMovingStrategy,
-  ToggleMovingStrategy,
-};
+export { MovingStrategy, RandomMovingStrategy };
