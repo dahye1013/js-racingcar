@@ -47,7 +47,7 @@ describe('로또 미션 Cypress', () => {
         const alertStub = cy.stub();
         cy.on('window:alert', alertStub);
 
-        const mockRacingCar = ['람보르기니가야르도', ''].join(',');
+        const mockRacingCar = ['티코', ''].join(',');
 
         cy.get('#car-name-input').type(mockRacingCar);
         cy.get('#car-name-submit-btn')
