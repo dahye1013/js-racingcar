@@ -43,7 +43,7 @@ describe('로또 미션 Cypress', () => {
           });
       });
 
-      it('(2) 빈 자동차 이름 등록 테스트', () => {
+      it('(3) 빈 자동차 이름 등록 테스트', () => {
         const alertStub = cy.stub();
         cy.on('window:alert', alertStub);
 
