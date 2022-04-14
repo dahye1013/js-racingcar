@@ -1,8 +1,7 @@
-import MainController from './controller/controller.js';
+import { init } from './controller/controller.js';
 
 const App = () => {
-  const controller = new MainController();
-  controller.initFirstView();
+  init();
 };
 
 App();
