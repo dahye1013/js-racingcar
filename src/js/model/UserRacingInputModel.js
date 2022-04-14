@@ -20,7 +20,7 @@ export default class UserRacingInputModel {
   makePlayResult() {
     this.#racingCarList = this.#carNames.reduce((acc, cur) => {
       acc[cur] = Array.from({ length: this.#playTimes }, () =>
-        RandomMovingStrategy.build().isMoveable()
+        RandomMovingStrategy.getInstance().isMoveable()
       );
       return acc;
     }, {});

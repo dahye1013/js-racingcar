@@ -1,9 +1,4 @@
-import { ERROR } from '../constants/message.js';
-
 class MovingStrategy {
-  build() {
-    throw new Error(ERROR.ABSTRACT_CLASS);
-  }
   isMoveable() {
     throw new Error(
       'MovingStrategy는 추상 클래스입니다. 별도의 구현이 필요합니다.'
@@ -12,8 +7,11 @@ class MovingStrategy {
 }
 
 class RandomMovingStrategy extends MovingStrategy {
-  static build() {
-    return new RandomMovingStrategy();
+  static instance;
+
+  static getInstance() {
+    if (!this.instance) this.instance = new RandomMovingStrategy();
+    return this.instance;
   }
 
   isMoveable() {
@@ -21,6 +19,4 @@ class RandomMovingStrategy extends MovingStrategy {
   }
 }
 
-
-
-export { MovingStrategy, RandomMovingStrategy };
+export { RandomMovingStrategy };
