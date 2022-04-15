@@ -1,16 +1,13 @@
-// util
-import { instanceCheck } from '../utils/typeCheck.js';
-
 // components
 import UserRacingInputComponent from '../components/UserRacingInputComponent.js';
 import GameProcessComponent from '../components/GameProcessComponent.js';
 
-// models
-import GameProcessModel from '../model/GameProcessModel.js';
 import UserRacingInputModel from '../model/UserRacingInputModel.js';
 
+// state
+import * as state from '../model/state.js';
+
 const userRacingInputModel = UserRacingInputModel.getInstance();
-const gameProcessModel = GameProcessModel.getInstance();
 
 const initFirstView = () => {
   UserRacingInputComponent({
@@ -19,18 +16,17 @@ const initFirstView = () => {
   });
 };
 
-const setGameConfigurationAndStart = (
-  gameConfigurationData,
-  _ = instanceCheck(gameConfigurationData, UserRacingInputModel)
-) => {
-  gameProcessModel.setGameConfigurationData(gameConfigurationData);
+const setGameConfigurationAndStart = gameConfigurationData => {
+  state.addCar(gameConfigurationData.carNames);
+  state.addPlayTime(gameConfigurationData.playTimes);
+  state.makeGameResult();
+
   GameProcessComponent({
-    gameProcessState: gameProcessModel,
+    gameProcessState: state.state,
+    consumeTimeHandler: state.consumeTime,
   });
 };
 
 export const init = () => {
   initFirstView();
 };
-
-

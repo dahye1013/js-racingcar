@@ -3,11 +3,7 @@ import { ID, TEMPLATE } from '../constants/selector.js';
 import { instanceCheck } from '../utils/typeCheck.js';
 import UserRacingInputModel from '../model/UserRacingInputModel.js';
 
-const UserRacingInput = ({
-  userRacingInputState,
-  _ = instanceCheck(userRacingInputState, UserRacingInputModel),
-  startGame,
-}) => {
+const UserRacingInput = ({ userRacingInputState, startGame }) => {
   const state = userRacingInputState;
 
   let isNameSubmitted = false;
@@ -43,7 +39,6 @@ const UserRacingInput = ({
     state.makePlayResult();
     startGame(state.createProcessSettingData());
   };
-
 
   const setEvent = () => {
     $currentElement.addEventListener('submit', e => {

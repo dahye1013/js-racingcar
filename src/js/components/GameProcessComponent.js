@@ -1,13 +1,8 @@
 import { duplicateTemplate } from '../utils/templateUtil.js';
 import { TEMPLATE, ID, CLASS } from '../constants/selector.js';
 import { MILLISECONDS } from '../constants/unit.js';
-import { instanceCheck } from '../utils/typeCheck.js';
-import GameProcessModel from '../model/GameProcessModel.js';
 
-const GameProcess = ({
-  gameProcessState,
-  _ = instanceCheck(gameProcessState, GameProcessModel),
-}) => {
+const GameProcess = ({ gameProcessState, consumeTimeHandler }) => {
   const state = gameProcessState;
 
   const $currentElement = duplicateTemplate(TEMPLATE.RACING_CAR_LIST_SECTION);
@@ -39,7 +34,7 @@ const GameProcess = ({
       return;
     }
 
-    state.consumeTime();
+    consumeTimeHandler();
 
     for (const [key, value] of Object.entries(state.racingCarList)) {
       value[state.leftPlayTime] && stepForward(key);

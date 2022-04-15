@@ -3,6 +3,7 @@ export default class GameProcessModel {
   #leftPlayTime;
   #carNames;
   #racingCarList;
+  #playTimes;
 
   static instance;
 
@@ -18,6 +19,7 @@ export default class GameProcessModel {
     racingCarList,
   }) {
     this.#consumeTime = consumeTime;
+    this.#playTimes = playTimes;
     this.#leftPlayTime = playTimes;
     this.#carNames = carNames;
     this.#racingCarList = racingCarList;
@@ -33,6 +35,10 @@ export default class GameProcessModel {
 
   get carNames() {
     return this.#carNames;
+  }
+
+  get playTimes() {
+    return this.#playTimes;
   }
 
   get leftPlayTime() {
